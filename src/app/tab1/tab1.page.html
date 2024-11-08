@@ -1,17 +1,17 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+  <ion-toolbar class="header">
+    <ion-title>Add a house details</ion-title>
   </ion-toolbar>
 </ion-header>
+<ion-content [fullscreen]="true" class="container">
+  <h3>Upload Image of the house </h3>
+  <!-- <img id="DefaultImage"  src={{HouseUrl}} /> -->
+  <!-- <ion-input type="file" id="insert" accept="image/*" /> -->
+  <h3>Upload description of the house </h3>
+ <ion-input id="input" /> 
+ <h3>Display Current Location </h3>
+ <p><b>Latitude:</b>{{Lat}}</p>
+ <p><b>Longitude:</b>{{Long}}</p>
+ <ion-button style="--background:#253B82" id="AddHouseDetails" >Add House details</ion-button>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 1 page"></app-explore-container>
 </ion-content>

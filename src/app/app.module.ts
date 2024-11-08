@@ -10,6 +10,8 @@ import { HouseholdProvider } from 'src/providers/household';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfigService } from 'src/providers/config';
 import { NavParams } from '@ionic/angular';
+import { AuthProvider } from 'src/providers/Auth';
+import { Storage  } from '@ionic/storage'
 
 
 
@@ -17,17 +19,15 @@ import { NavParams } from '@ionic/angular';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), 
+  imports: [BrowserModule, IonicModule.forRoot(),
     AppRoutingModule, 
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
-
   ]
     ,
   providers: [
-    HouseholdProvider,ConfigService, NavParams, 
+    HouseholdProvider,ConfigService, NavParams, AuthProvider,Storage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
   ],
   bootstrap: [AppComponent],

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HouseholdProvider } from 'src/providers/household';
+
 
 @Component({
   selector: 'app-tab2',
@@ -6,7 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-
-  constructor() {}
+  houseListArray:any
+  constructor(public household:HouseholdProvider) {
+   this.getRegisteredHouses();
+  }
+  getRegisteredHouses(){
+    this.household.GetHousesSaved().subscribe((_responsegetHouses:any) =>{
+      console.log(_responsegetHouses)
+      console.log(_responsegetHouses.housesList ,"house")
+      this.houseListArray = _responsegetHouses.housesList
+      console.log(this.houseListArray.houseImage,"house")
+    })
+  }
 
 }

@@ -5,6 +5,8 @@ import { throwError } from 'rxjs'
 import { catchError } from 'rxjs/operators';
 import { ConfigService } from '../providers/config'
 import { RegisterNewUser } from 'src/models/RegisterNewUser.model';
+import { Authentification } from 'src/models/Authentification.model';
+import { AddHouse } from 'src/models/AddHouse.model';
 
 
 const httpOptions = {
@@ -14,12 +16,13 @@ const httpOptions = {
 @Injectable()
 export class HouseholdProvider {
     private readonly baseUrl!: string;
-    private RegisterNewUser!:RegisterNewUser
+    private RegisterNewUser!: RegisterNewUser
+    private Authentification!: Authentification
     constructor(public http: HttpClient, public ConfigService: ConfigService) {
         this.baseUrl = this.ConfigService.apiUrl;
         console.log('Hello GroomHeavenProvider Provider');
     }
-   
+
     //Register New User Method 
     Register_UserApi(RegisterNewUser: RegisterNewUser) {
         const url = `${this.baseUrl}/api/account/Register`
@@ -29,6 +32,35 @@ export class HouseholdProvider {
                 catchError(this.handleError)
             );
     }
+
+    // Login User 
+    AuthentificationUser(Authentification: Authentification) {
+        const url = `${this.baseUrl}/api/authenticate`
+        var dataUser = this.http.post(url, Authentification, httpOptions)
+        return dataUser
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+    // Add house API
+    SaveHouse(AddHouse: AddHouse) {
+        const url = `${this.baseUrl}/api/house/SaveHouse`
+        var dataUser = this.http.post(url, AddHouse, httpOptions)
+        return dataUser
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+    //  Get saved houses
+    GetHousesSaved() {
+        const url = `${this.baseUrl}/api/house/GetHouses` 
+        var dataUser = this.http.get(url, httpOptions)
+        return dataUser
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
     private handleError(errorRes: HttpErrorResponse) {
         let errorMessage = 'An unknown error occurred!';
         return throwError(errorRes);
