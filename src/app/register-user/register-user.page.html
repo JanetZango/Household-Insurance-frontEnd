@@ -1,13 +1,38 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>registerUser</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">registerUser</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class ="container">
+    <!-- <img id ="img" src="../../assets/house-insurance1.jpg" /> -->
+    <h3>Household Insurance </h3>
+    <h5>Sign Up</h5>
+    <form [formGroup]="signUpForm">
+      <div class="input">
+        <ion-input placeholder="Firstname" formControlName="firstname"/>
+        <div class="field-error" *ngIf="_isInvalidControl('firstname')">
+          <p>Please enter Username</p>
+        </div>
+        <ion-input placeholder="Lstname" formControlName="lastname"/>
+        <div class="field-error" *ngIf="_isInvalidControl('lastname')">
+          <p>Please enter Username</p>
+        </div>
+
+        <ion-input placeholder=" Email Aaddres" formControlName="emailAddress"/>
+        <div class="field-error" *ngIf="_isInvalidControl('EmailAddress')">
+          <p>Please enter email address</p>
+        </div>
+        <ion-input placeholder="Contact" formControlName="contact"/>
+        <div class="field-error" *ngIf="_isInvalidControl('contact')">
+          <p>Please enter contact</p>
+        </div>
+        <ion-input type="password" placeholder="Password" formControlName="password"/>
+        <div class="field-error" *ngIf="_isInvalidControl('password')">
+          <p>Please enter password</p>
+        </div>
+        <ion-input type="password"  placeholder="Confirm Password" formControlName="confirmPassword"/>
+        <div class="field-error" *ngIf="_isInvalidControl('confirmPassword')">
+          <p>Password doesnot must</p>
+        </div>
+       </div>
+       <ion-button style="--background:#253B82" [disabled]="!signUpForm.valid" (click)="Register()">Register</ion-button>
+       <h4>You want to go back? <a routerLink="/login" fill="clear">Login</a></h4>
+    </form>
+  </div>
 </ion-content>
