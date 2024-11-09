@@ -60,7 +60,28 @@ export class HouseholdProvider {
                 catchError(this.handleError)
             );
     }
+    // getRegistersUsers
+    getRegisteredUser() {
+        const url = `${this.baseUrl}/api/account/GetUsers` 
+        var dataUser = this.http.get(url, httpOptions)
+        console.log(dataUser)
+        return dataUser
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
 
+    // Delete house and all images 
+    DeleteHouse(ID:any) {
+        const url = `${this.baseUrl}/api/house/DeleteHouse?ID=`+ID
+        var dataUser = this.http.get(url, httpOptions)
+        return dataUser
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+    
     private handleError(errorRes: HttpErrorResponse) {
         let errorMessage = 'An unknown error occurred!';
         return throwError(errorRes);

@@ -9,6 +9,8 @@ import { Router, NavigationExtras } from '@angular/router';
 import { Geolocation } from '@capacitor/geolocation';
 
 import { AuthProvider } from 'src/providers/Auth';
+
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -16,43 +18,49 @@ import { AuthProvider } from 'src/providers/Auth';
 })
 export class Tab1Page {
   private Addhouse!:AddHouse
-  HouseUrl = "../../assets/Images/defaultImage.jpg";
+  HouseUrl = "../../assets/defaultImage.jpg";
   getEmailAddress:any
   Lat!:any;
   Long!:any
+  CurrentlyLoggedInUser:any
+  DataOfLoggedInPerson:any
+  private AddHouse!:AddHouse
+  description:any
   constructor(public alertCtrl: AlertController, private router: Router,public auth:AuthProvider,
     public household: HouseholdProvider, private route: ActivatedRoute) {
 
       this.printCurrentPosition();
+      this.getLoggedinSavedData();
+      this.getAllRegisteredUsersOnTheSystem();
+    }
 
-
+    getLoggedinSavedData(){
       this.auth.getUser().then(data=>{
-      console.log(data)
-      })
+        console.log(data.queryParams.emailAddres)
+        this.CurrentlyLoggedInUser = data.queryParams.emailAddres
+        })
+  
+    }
 
-      this.route.queryParams.subscribe(params => {
-        console.log(params)
-        this.getEmailAddress = params["emailAddres"];
-        console.log(this.getEmailAddress)
-  
-        // this.household.getUserApis().subscribe((data: any) => {
-        //   console.log(data.userList[0].emailAddress)
-  
-        //   for(var i=0; i<data.length;i++){
-        //     console.log(data.userList[i])
-        //     if(this.getEmailAddress == data.userList[i].emailAddress
-        //     ){
-        //       let obj ={
-        //         userID: data.userList[i].userID
-  
-        //       }
-        //       console.log(obj)
-        //     }
-        //   }
-        
-  
-        // })
-      })
+    getAllRegisteredUsersOnTheSystem(){
+      this.household.getRegisteredUser().subscribe((data:any)=>{
+        console.log(data.userList,"users")
+        var getAllUsers = data.userList
+        console.log(getAllUsers)
+        for(var i=0; i < getAllUsers.length;i++){
+          if(this.CurrentlyLoggedInUser == getAllUsers[i].emailAddress ){
+          console.log(getAllUsers[0])
+          let obj ={
+            emailAddress: getAllUsers[i].emailAddress,
+            userID:getAllUsers[i].userID
+            
+          }
+          console.log(obj)
+          this.DataOfLoggedInPerson = obj.userID
+        }
+   
+        }
+        })
     }
   
     
@@ -64,6 +72,56 @@ export class Tab1Page {
         this.Long = coordinates.coords.longitude
 
       }; 
+      async insertImagine(event: any) {
+        if (event.target.files && event.target.files[0]) {
+          let reader = new FileReader();
+    
+          if (event.target.files[0].size > 1500000) {
+            const alert = await this.alertCtrl.create({
+              header: "Oh no!",
+              message: "your photo is too large, please choose a photo with 1.5MB or less.",
+              buttons: ['OK'],
+              cssClass: "myAlert",
+            });
+            await alert.present();
+          }
+          else {
+            reader.onload = (event: any) => {
+              this.HouseUrl = event.target.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+          }
+        }
+      }
+
+      AddHouseButton() {
+        this.AddHouse = new AddHouse
+        this.AddHouse.description = this.description
+        this.AddHouse.houseImage = this.HouseUrl
+        this.AddHouse.address = 'soweto'
+        this.AddHouse.userID = this.DataOfLoggedInPerson
+        this.AddHouse.location = "YES"
+        this.AddHouse.images= []
+    
+        console.log(this.AddHouse)
+        this.household.SaveHouse(this.AddHouse).subscribe((_responseHouse:any) => {
+          console.log(_responseHouse)
+          
+    
+        },
+          async (error: any) => {
+            console.log('error')
+            const alert = await this.alertCtrl.create({
+              // header: "Oh no!",
+              message: "Information not saved",
+              buttons: ['OK'],
+              cssClass: "myAlert",
+            });
+            await alert.present();
+          });
+      }
+
+
     
 
 }

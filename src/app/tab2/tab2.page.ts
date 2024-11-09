@@ -7,6 +7,7 @@ import { HouseholdProvider } from 'src/providers/household';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
+
 export class Tab2Page {
   houseListArray:any
   constructor(public household:HouseholdProvider) {
