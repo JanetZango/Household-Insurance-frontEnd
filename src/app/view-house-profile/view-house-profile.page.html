@@ -10,7 +10,17 @@
   </ion-segment-button>
 </ion-segment>
 <div *ngIf="selectedSegment === 'home'">
-  <p>This is the Home section.</p>
+  <ion-grid>
+    <!-- Row 1 -->
+    <ion-row>
+      <ion-col size="5" *ngFor="let z of DisplayImages">
+        <img src="{{z.houseImage}}"/>
+        <ion-button id="IconButton" (click)="deleteHouse(z)" fill="clear"><ion-icon name="trash-outline"></ion-icon></ion-button>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
 </div>
 <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="GoToUpload()">
   <ion-fab-button>

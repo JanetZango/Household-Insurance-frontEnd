@@ -2,13 +2,13 @@
 <ion-content [fullscreen]="true">
   <h6>Upload House Images</h6>
   <div class="container">
-    <h2>Preview</h2>
-    <div *ngFor="let preview of imagePreviews">
-      <img [src]="preview" [alt]="'Image preview'" width="100" />
+    <!-- <h2>Preview</h2>
+    <div *ngFor="let preview of imagePreviews"> -->
+      <img [src]="HouseUrl" width="100" />
     <!-- </div> -->
-  </div>
+  <!-- </div> -->
     <ion-item>
-      <input type="file" (change)="onFileChange($event)" multiple />
+      <ion-input type="file" id="insert" accept="image/*" (change)="insertImagine($event)"/>
     </ion-item>
   
     <ion-button (click)="uploadImages()" style="--background:#816965">Upload Images</ion-button>

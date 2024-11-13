@@ -53,7 +53,7 @@ export class HouseholdProvider {
     }
     //  Get saved houses
     GetHousesSaved() {
-        const url = `${this.baseUrl}/api/house/GetHouses` 
+        const url = `${this.baseUrl}/api/house/GetHouses`
         var dataUser = this.http.get(url, httpOptions)
         return dataUser
             .pipe(
@@ -62,7 +62,7 @@ export class HouseholdProvider {
     }
     // getRegistersUsers
     getRegisteredUser() {
-        const url = `${this.baseUrl}/api/account/GetUsers` 
+        const url = `${this.baseUrl}/api/account/GetUsers`
         var dataUser = this.http.get(url, httpOptions)
         console.log(dataUser)
         return dataUser
@@ -71,9 +71,30 @@ export class HouseholdProvider {
             );
     }
 
+    // getRegistersUsers
+    getHouseDetailsWithImages(houseID:any) {
+        const url = `${this.baseUrl}/api/house/GetHouseDetails?ID=` + houseID
+        var dataUser = this.http.get(url, httpOptions)
+        console.log(dataUser)
+        return dataUser
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+
+
     // Delete house and all images 
-    DeleteHouse(ID:any) {
-        const url = `${this.baseUrl}/api/house/DeleteHouse?ID=`+ID
+    DeleteHouse(ID: any) {
+        const url = `${this.baseUrl}/api/house/DeleteHouse?ID=` + ID
+        var dataUser = this.http.get(url, httpOptions)
+        return dataUser
+            .pipe(
+                catchError(this.handleError)
+            );
+    }
+    // Delete images of house
+    DeleteHouseImages(ID: any) {
+        const url = `${this.baseUrl}/api/house/DeleteHouseImage?ID=` + ID
         var dataUser = this.http.get(url, httpOptions)
         return dataUser
             .pipe(
@@ -81,7 +102,6 @@ export class HouseholdProvider {
             );
     }
 
-    
     private handleError(errorRes: HttpErrorResponse) {
         let errorMessage = 'An unknown error occurred!';
         return throwError(errorRes);

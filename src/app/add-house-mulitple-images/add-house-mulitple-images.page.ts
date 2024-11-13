@@ -23,7 +23,8 @@ export class AddHouseMulitpleImagesPage implements OnInit {
   location!:any
   CurrentlyLoggedInUser!:any
   DataOfLoggedInPerson!:any
-  preview="../../assets/defaultImage.jpg";
+  HouseUrl="../../assets/defaultImage.jpg";
+  Imagerr:any[]=[]
 private AddHouse!:AddHouse
   constructor(private route: ActivatedRoute,public household:HouseholdProvider,public alertCtrl: AlertController,public auth:AuthProvider) { }
 
@@ -66,39 +67,64 @@ private AddHouse!:AddHouse
       }
       })
   }
+  async insertImagine(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      let reader = new FileReader();
 
-  // Handle file input change
-  onFileChange(event: any) {
-    const files = event.target.files;
-    if (files.length > 0) {
-      this.selectedImages = Array.from(files);
-      console.log(this.selectedImages)
-
-      // Show image previews
-      this.imagePreviews = [];
-      console.log(this.imagePreviews)
-      for (let i = 0; i < this.selectedImages.length; i++) {
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.imagePreviews.push(e.target.result);
-        };
-        reader.readAsDataURL(this.selectedImages[i]);
+      if (event.target.files[0].size > 1500000) {
+        const alert = await this.alertCtrl.create({
+          header: "Oh no!",
+          message: "your photo is too large, please choose a photo with 1.5MB or less.",
+          buttons: ['OK'],
+          cssClass: "myAlert",
+        });
+        await alert.present();
+      }
+      else {
+        reader.onload = (event: any) => {
+          this.HouseUrl = event.target.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
       }
     }
   }
+  // Handle file input change
+  // onFileChange(event: any) {
+  //   const files = event.target.files;
+  //   if (files.length > 0) {
+  //     this.selectedImages = Array.from(files);
+  //     console.log(this.selectedImages)
+
+  //     // Show image previews
+  //     this.imagePreviews = [];
+  //     console.log(this.imagePreviews)
+  //     for (let i = 0; i < this.selectedImages.length; i++) {
+  //       const reader = new FileReader();
+  //       reader.onload = (e: any) => {
+  //         this.imagePreviews.push(e.target.result);
+  //       };
+  //       reader.readAsDataURL(this.selectedImages[i]);
+  //     }
+  //   }
+  // }
   uploadImages() {
-    if (this.selectedImages.length > 0) {
-      const formData = new FormData();
-      console.log(formData)
-      for (let image of this.selectedImages) {
-        console.log(this.selectedImages)
-        formData.append('images', image);
-      }
+    // if (this.selectedImages.length > 0) {
+    //   const formData = new FormData();
+    //   console.log(formData)
+    //   for (let image of this.selectedImages) {
+    //     console.log(this.selectedImages)
+    //     formData.append('images', image);
+    //   }
 
       let obj={
-        houseImage:this.selectedImages
+        houseImage:this.HouseUrl
       }
       console.log(obj)
+
+      var uploadImage = obj
+      console.log(uploadImage)
+      this.Imagerr.push(uploadImage)
+      console.log(this.Imagerr)
 
       this.AddHouse = new AddHouse
       this.AddHouse.description = this.description
@@ -108,7 +134,7 @@ private AddHouse!:AddHouse
       this.AddHouse.location = this.location
       this.AddHouse.latitude = this.latitude
       this.AddHouse.longitude = this.longitude
-      this.AddHouse.images= this.selectedImages
+      this.AddHouse.images= this.Imagerr
   
       console.log(this.AddHouse)
        this.household.SaveHouse(this.AddHouse).subscribe(async (_responseHouse:any) => {
@@ -134,10 +160,10 @@ private AddHouse!:AddHouse
         });
 
       console.log('Uploading images...', this.selectedImages);
-    } else {
-      console.log('No images selected');
-    }
-  }
+    } 
+    
+    
+  
 
   
 
