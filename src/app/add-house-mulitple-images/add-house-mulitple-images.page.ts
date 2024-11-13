@@ -4,6 +4,7 @@ import { AddHouse } from 'src/models/AddHouse.model';
 import { HouseholdProvider } from 'src/providers/household';
 import { AlertController } from '@ionic/angular';
 import { AuthProvider } from 'src/providers/Auth';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-house-mulitple-images',
@@ -22,11 +23,12 @@ export class AddHouseMulitpleImagesPage implements OnInit {
   location!:any
   CurrentlyLoggedInUser!:any
   DataOfLoggedInPerson!:any
+  preview="../../assets/defaultImage.jpg";
 private AddHouse!:AddHouse
   constructor(private route: ActivatedRoute,public household:HouseholdProvider,public alertCtrl: AlertController,public auth:AuthProvider) { }
 
   ngOnInit() {
-    const data = history.state.a; // Accessing the passed data
+    const data = history.state.House_data; // Accessing the passed data
     console.log(data);
     this.address = data.address
     this.description = data.description
@@ -109,15 +111,15 @@ private AddHouse!:AddHouse
       this.AddHouse.images= this.selectedImages
   
       console.log(this.AddHouse)
-       this.household.SaveHouse(this.AddHouse).subscribe((_responseHouse:any) => {
+       this.household.SaveHouse(this.AddHouse).subscribe(async (_responseHouse:any) => {
         console.log(_responseHouse)
-        //  const alert = await this.alertCtrl.create({
-        //   header: "Oh no!",
-        //   message: "invalid credentials provided, Please try again or contact adiministrator",
-        //   buttons: ['OK'],
-        //   cssClass: "myAlert",
-        // });
-        // await alert.present();
+         const alert = await this.alertCtrl.create({
+          // header: "Oh no!",
+          message: "Image successfully saved",
+          buttons: ['OK'],
+          cssClass: "myAlert",
+        });
+        await alert.present();
   
       },
         async (error: any) => {

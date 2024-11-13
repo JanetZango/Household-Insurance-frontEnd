@@ -59,9 +59,7 @@ export class Tab3Page {
       console.log(this.houseListArray.houseImage,"house")
     })
   }
-  deleteHouse(a:any){
 
-  }
   getindex(a:any){
    console.log(a)
   //  this.houseID_delete = a.houseID
@@ -74,8 +72,10 @@ export class Tab3Page {
   });
   }
 
-  UploadMultiple(){
-    // console.log(a)
-    this.router.navigate(['/add-house-mulitple-images'])
+  VireMoreDetails(a:any){
+    console.log(a)
+    this.router.navigate(['/view-house-profile'], {
+      state: { a }
+    });
   }
 }
