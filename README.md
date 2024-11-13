@@ -30,13 +30,21 @@ Guide users to get a local copy up and running. This section should be a quick o
 -Install dependencies<br/>
 
 ### Usage
-1.To start the server, run:
--ionic serve
-2.Open your browser and go to http://localhost:8100 to see the app in action
+1.To start the server, run:<br/>
+-ionic serve<br/>
+2.Open your browser and go to http://localhost:8100 to see the app in action<br/>
 
 ### Contact
 -Name - janetzango@gmail.com<br/>
 -GitHub:https://github.com/JanetZango/<br/>
+
+## Version History
+- 0.0.1 <br/>
+  Initial Release
+
+## License
+This project is licensed under the Janet Zango License - see the LICENSE.md file for details
+
 
 
 
