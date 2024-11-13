@@ -9,4 +9,26 @@ This project aims to help users claim for insurance. It was developed using Ioni
 
 ## Getting Started
 Guide users to get a local copy up and running. This section should be a quick overview of installation and setup.
+
 ### Prerequisites
+1.Node js<br/>
+-https://nodejs.org/dist/v19.9.0/node-v19.9.0-x64.msi<br/>
+2.Ionic 5<br/>
+-npm install -g @ionic/cli<br/>
+3.Andriod Studio<br/>
+4.Visual Studio Code<br/>
+5.Java jdk<br/>
+-jdk-8u361-windows-x64<br/>
+
+### Installation
+1.Clone the repository: <br/>
+-https://github.com/JanetZango/Household-Insurance-frontEnd.git <br/>
+2.Navigate to the project directory<br/>
+-cd documents/MobileApplication/Household_Insruance
+3.Install dependencies<br/>
+-npm install<br/>
+-Install dependencies<br/>
+
+### Usage
+
+
