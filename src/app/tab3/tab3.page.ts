@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthProvider } from 'src/providers/Auth';
 import { HouseholdProvider } from 'src/providers/household';
+import { Router, NavigationExtras } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -16,13 +18,13 @@ export class Tab3Page {
   houseListArray:any
   houseID_delete:any
 
-  constructor(public auth:AuthProvider,public household:HouseholdProvider) {
+  constructor(public auth:AuthProvider,public household:HouseholdProvider, private router: Router,private navController: NavController) {
     this.getLoggedinSavedData();
     this.getAllRegisteredUsersOnTheSystem();
     this.getRegisteredHouses();
   }
   getLoggedinSavedData(){
-    this.auth.isLoggedInStatus().then(data=>{
+    this.auth.getLoggedInUserDetails().then(data=>{
       console.log(data.queryParams.emailAddres)
       this.CurrentlyLoggedInUser = data.queryParams.emailAddres
       })
@@ -57,12 +59,23 @@ export class Tab3Page {
       console.log(this.houseListArray.houseImage,"house")
     })
   }
+  deleteHouse(a:any){
+
+  }
   getindex(a:any){
    console.log(a)
-   this.houseID_delete = a.houseID
-   console.log(this.houseID_delete)
-   this.household.DeleteHouse(this.houseID_delete).subscribe(_responseDelete=>{
-    console.log(_responseDelete)
-   })
+  //  this.houseID_delete = a.houseID
+  //  console.log(this.houseID_delete)
+  //  this.household.DeleteHouse(this.houseID_delete).subscribe(_responseDelete=>{
+  //   console.log(_responseDelete)
+  //  })
+  this.navController.navigateForward(['/add-house-mulitple-images'], {
+    state: { a }
+  });
+  }
+
+  UploadMultiple(){
+    // console.log(a)
+    this.router.navigate(['/add-house-mulitple-images'])
   }
 }

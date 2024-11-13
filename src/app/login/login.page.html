@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
     <div class ="container">
-      <!-- <img id ="img" src="../../assets/Images/house-insurance1.jpg" /> -->
+      <img id ="img" src="../../assets/burning-house.png" />
       <h3>Household Insurance</h3>
       <h5>Sign In</h5>
       <form [formGroup]="signInForm">
@@ -14,8 +14,8 @@
           <p>Please enter password</p>
         </div>
        </div>
-       <ion-button style="--color:#253B82" fill="clear">Forgot password?</ion-button>
-       <ion-button  (click)="LoginUser()" style="--background:#253B82" [disabled]="!signInForm.valid" (click)="LoginUser()">Login</ion-button>
+       <!-- <ion-button style="--color:#816965" fill="clear">Forgot password?</ion-button> -->
+       <ion-button  (click)="LoginUser()" style="--background:#816965" [disabled]="!signInForm.valid" (click)="LoginUser()">Login</ion-button>
        <h4>You don't have an account? <a routerLink="/register-user">Register</a></h4>
       </form>
     </div>

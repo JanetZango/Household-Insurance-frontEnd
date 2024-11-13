@@ -23,10 +23,8 @@ export class LoginPage implements OnInit {
     public alertCtrl: AlertController, private router: Router, public loader: LoadingController) {
     this._buildForm();
 
-    this.auth.isLoggedInStatus().then(data=>{
-      console.log(data)
-      })
-
+    // var yes = this.auth.logout()
+    // console.log(yes)
   }
 
   ngOnInit() {
@@ -60,9 +58,9 @@ export class LoginPage implements OnInit {
         }
       }
       console.log(params)
-      this.auth.login(params).then((_responseAut:any) => {
+     var _responseAut = this.auth.login(params)
         console.log(_responseAut)
-      })
+      
       this.router.navigate(['/tabs'])
 
 

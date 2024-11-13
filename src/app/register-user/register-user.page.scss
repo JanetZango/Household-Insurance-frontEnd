@@ -5,12 +5,12 @@
     }
 
     #img {
-        height: 250px;
-        width: 250px;
+        height: 180px;
+        width: 180px;
     }
 
     ion-input {
-        border: 2px solid #DF3260;
+        border: 2px solid #816965;
         margin: 7px auto;
         border-radius: 100px;
         color: rgb(156, 151, 151);
@@ -24,12 +24,18 @@
     h3 {
         padding: 20px;
         font-size: 0.9em;
-        color: #DF3260;
+        color: #816965;
         font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
 
     h5 {
         color: lightgray;
+    }
+    a{
+        color:#8CA22F;
+    }
+    h4{
+        color:#F69036;
     }
     .field-error {
         color: red;

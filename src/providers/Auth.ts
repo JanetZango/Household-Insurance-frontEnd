@@ -19,35 +19,30 @@ export class AuthProvider {
         console.log('Hello AuthProvider Provider');
 
     }
+    async login(user: any): Promise<void> {
+        await this.storage.create();
+        await this.storage.set('user', user);
 
-
-    login(user: any) {
-        this.isAuthenticated = true;
-        return this.storage.create().then((data) => {
-            return this.storage.set('user', user).then((data) => {
-                this.user = user;
-            });
-        })
-
+     
     }
 
-    logout() {
-        this.isAuthenticated = true;
-        return this.storage.create().then((data) => {
-        return this.storage.remove('user').then(() => {
-            this.user = null;
-        });
-    })
-
+    getLoggedInUserDetails() {
+        return this.storage.get('user')
     }
 
-    isLoggedInStatus() {
-        return this.storage.create().then((data) => {
-            return this.storage.get('user')
-        })
+
+    // Check if user is authenticated
+    async isLoggedInStatus(): Promise<boolean> {
+        await this.storage.create();
+        const token = await this.storage.get('user');
+        return !!token; // Return true if token exists
     }
-    isLoggedInStatus1(): boolean {
-        return localStorage.getItem('user') === 'loggedIn';
-      }
+
+    // Remove token (logout)
+    async logout(): Promise<void> {
+        await this.storage.create();
+        await this.storage.remove('user');
+    }
+
 
 }

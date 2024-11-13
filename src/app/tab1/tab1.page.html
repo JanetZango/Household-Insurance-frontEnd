@@ -1,9 +1,6 @@
-<ion-header [translucent]="true">
-  <ion-toolbar class="header">
-    <ion-title>Add a house details</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 <ion-content [fullscreen]="true" class="container">
+  <h6>Add new house</h6>
   <h3>Upload Image of the house </h3>
   <img id="DefaultImage"  src={{HouseUrl}} />
   <ion-input type="file" id="insert" accept="image/*" (change)="insertImagine($event)"/>
@@ -12,6 +9,6 @@
  <h3>Display Current Location </h3>
  <p><b>Latitude:</b>{{Lat}}</p>
  <p><b>Longitude:</b>{{Long}}</p>
- <ion-button style="--background:#253B82" id="AddHouseDetails" (click)="AddHouseButton()">Add House details</ion-button>
+ <ion-button style="--background:#816965" id="AddHouseDetails" (click)="AddHouseButton()">Add House details</ion-button>
 
 </ion-content>

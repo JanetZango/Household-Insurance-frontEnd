@@ -1,12 +1,17 @@
 <ion-content [fullscreen]="true">
+  <h6>House List</h6>
   <div class="cards">
     <div class="mainCard" *ngFor="let a of houseListArray">
       <div class="img">
-      <img src="{{a.houseImage}}"/>
+        <img src="{{a.houseImage}}" />
       </div>
       <div class="description">
-      <p id="descriptionParagraph">{{a.description}}</p>
+        <p id="descriptionParagraph"><b>Latitude:</b>{{a.latitude}}</p>
+        <p id="descriptionParagraph"><b>Longitude:</b>{{a.longitude}}</p>
+        <p id="descriptionParagraph">{{a.description}}</p>
+        <ion-button id="IconButton" (click)="deleteHouse(a)" fill="clear"><ion-icon name="trash-outline"></ion-icon></ion-button>
       </div>
+    
     </div>
   </div>
 

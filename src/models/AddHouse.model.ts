@@ -6,5 +6,5 @@ export class AddHouse{
     public longitude!:string;
     public location!:string
     public userID!:string
-    public images!:[]
+    public images!:{}
 }

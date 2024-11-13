@@ -23,6 +23,14 @@ const routes: Routes = [
     path: 'register-user',
     loadChildren: () => import('./register-user/register-user.module').then( m => m.RegisterUserPageModule)
   },
+  {
+    path: 'add-house-mulitple-images',
+    loadChildren: () => import('./add-house-mulitple-images/add-house-mulitple-images.module').then( m => m.AddHouseMulitpleImagesPageModule)
+  },
+  {
+    path: 'view-house-profile',
+    loadChildren: () => import('./view-house-profile/view-house-profile.module').then( m => m.ViewHouseProfilePageModule)
+  },
 
 ];
 @NgModule({

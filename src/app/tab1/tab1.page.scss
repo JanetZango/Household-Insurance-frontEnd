@@ -20,8 +20,8 @@ h4{
     background-color: #253B82;
 }
 #DefaultImage{
-    height:300px;
-    width:330px;
+    height:250px;
+    width:290px;
     margin:5px auto;
     object-fit: cover;
 }
@@ -34,7 +34,13 @@ h3{
     color: #253B82;
 }
 
-.AddHouseDetails{
-    max-width:90%;
+#AddHouseDetails{
+    // max-width:90%;
+    // background-color: #816965;
 
+}
+h6{
+    font-size: 1.5em;
+    color:#816965;
+    font-weight: 300 !important;
 }

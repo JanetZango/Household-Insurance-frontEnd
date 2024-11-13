@@ -17,20 +17,29 @@
     width:40%;
     height:170px;
     object-fit: cover;
+    img{
+        object-fit: cover;
+        height:100%
+    }
 }
 .description{
     padding:5px;
-    width:50%;
+    width:60%;
     height:170px;
- 
+
    
 }
 #descriptionParagraph{
-    // white-space: nowrap;
-    // overflow: hidden;
-    // text-overflow: ellipsis;
-    max-width: 230px;
-    // padding:5px;
-    // border:2px solid red ;
+    // max-width: 230px;
 
+}
+h6{
+    font-size: 1.5em;
+    color:#816965;
+    font-weight: 300 !important;
+    text-align: center;
+}
+#IconButton{
+   color:red;
+   margin-left:70%;
 }

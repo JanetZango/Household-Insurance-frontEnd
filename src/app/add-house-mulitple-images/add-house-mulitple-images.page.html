@@ -1,0 +1,15 @@
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <input type="file" (change)="onFileChange($event)" multiple />
+  </ion-item>
+
+  <ion-button (click)="uploadImages()">Upload Images</ion-button>
+
+  <!-- <div *ngIf="imagePreviews"> -->
+    <h2>Preview</h2>
+    <div *ngFor="let preview of imagePreviews">
+      <img [src]="preview" [alt]="'Image preview'" width="100" />
+    <!-- </div> -->
+  </div>
+</ion-content>

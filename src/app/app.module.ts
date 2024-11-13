@@ -31,7 +31,7 @@ import { AuthGuard } from '../providers/AuthGuard';
   ]
     ,
   providers: [
-    HouseholdProvider,ConfigService, NavParams, AuthProvider,Storage,AuthGuard,
+    HouseholdProvider,ConfigService, NavParams, AuthProvider,AuthGuard,Storage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
   ],
   bootstrap: [AppComponent],

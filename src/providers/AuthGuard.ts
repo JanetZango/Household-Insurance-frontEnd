@@ -2,19 +2,22 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthProvider } from '../providers/Auth';
+import { Storage } from '@ionic/storage';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthProvider, private router: Router) {}
+    constructor(private authService: AuthProvider, private router: Router, public storage:Storage) { }
 
-  canActivate(): boolean {
-    if (this.authService.isLoggedInStatus1()) {
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
+    async canActivate(): Promise<boolean> {
+        const authenticated = await this.authService.isLoggedInStatus();
+        console.log(authenticated)
+        if (!authenticated) {
+            this.router.navigate(['/login']); // Redirect to login page if not authenticated
+            return false;
+        }
+             return true; 
     }
-  }
+
 }
