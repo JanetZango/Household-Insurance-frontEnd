@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
     public alertCtrl: AlertController, private router: Router, public loader: LoadingController) {
     this._buildForm();
 
-    this.auth.getUser().then(data=>{
+    this.auth.isLoggedInStatus().then(data=>{
       console.log(data)
       })
 

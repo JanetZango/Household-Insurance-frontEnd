@@ -11,7 +11,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfigService } from 'src/providers/config';
 import { NavParams } from '@ionic/angular';
 import { AuthProvider } from 'src/providers/Auth';
-import { Storage  } from '@ionic/storage'
+import { Storage  } from '@ionic/storage';
+import { AuthGuard } from '../providers/AuthGuard';
+
+
 
 
 
@@ -24,10 +27,11 @@ import { Storage  } from '@ionic/storage'
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+  
   ]
     ,
   providers: [
-    HouseholdProvider,ConfigService, NavParams, AuthProvider,Storage,
+    HouseholdProvider,ConfigService, NavParams, AuthProvider,Storage,AuthGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
   ],
   bootstrap: [AppComponent],

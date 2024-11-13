@@ -12,7 +12,9 @@ export class AuthProvider {
     isLoggedIn!: Boolean;
     user!: any;
     serial!: any;
-    LogeedInUser!: any;
+
+    private isAuthenticated = false
+
     constructor(public http: HttpClient, public storage: Storage) {
         console.log('Hello AuthProvider Provider');
 
@@ -20,9 +22,9 @@ export class AuthProvider {
 
 
     login(user: any) {
+        this.isAuthenticated = true;
         return this.storage.create().then((data) => {
             return this.storage.set('user', user).then((data) => {
-                this.isLoggedIn = true;
                 this.user = user;
             });
         })
@@ -30,19 +32,22 @@ export class AuthProvider {
     }
 
     logout() {
+        this.isAuthenticated = true;
         return this.storage.create().then((data) => {
         return this.storage.remove('user').then(() => {
-            this.isLoggedIn = false;
             this.user = null;
         });
     })
 
     }
 
-    getUser() {
+    isLoggedInStatus() {
         return this.storage.create().then((data) => {
             return this.storage.get('user')
         })
     }
+    isLoggedInStatus1(): boolean {
+        return localStorage.getItem('user') === 'loggedIn';
+      }
 
 }

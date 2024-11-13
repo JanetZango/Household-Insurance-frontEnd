@@ -31,25 +31,25 @@ export class Tab1Page {
 
       this.printCurrentPosition();
       this.getLoggedinSavedData();
-      this.getAllRegisteredUsersOnTheSystem();
+   
     }
 
     getLoggedinSavedData(){
-      this.auth.getUser().then(data=>{
+      this.auth.isLoggedInStatus().then(data=>{
         console.log(data.queryParams.emailAddres)
         this.CurrentlyLoggedInUser = data.queryParams.emailAddres
+        console.log(this.CurrentlyLoggedInUser)
+        this.getAllRegisteredUsersOnTheSystem();
         })
-  
     }
 
     getAllRegisteredUsersOnTheSystem(){
       this.household.getRegisteredUser().subscribe((data:any)=>{
         console.log(data.userList,"users")
         var getAllUsers = data.userList
-        console.log(getAllUsers)
         for(var i=0; i < getAllUsers.length;i++){
           if(this.CurrentlyLoggedInUser == getAllUsers[i].emailAddress ){
-          console.log(getAllUsers[0])
+            console.log(getAllUsers[i],"yes")
           let obj ={
             emailAddress: getAllUsers[i].emailAddress,
             userID:getAllUsers[i].userID
@@ -67,9 +67,10 @@ export class Tab1Page {
       printCurrentPosition = async () => {
         console.log("Hi");
         const coordinates = await Geolocation.getCurrentPosition();
-        console.log('Current position:', coordinates.coords.latitude);        
+   
         this.Lat = coordinates.coords.latitude
         this.Long = coordinates.coords.longitude
+        console.log('Current position:',this.Lat,this.Long);     
 
       }; 
       async insertImagine(event: any) {
@@ -101,6 +102,8 @@ export class Tab1Page {
         this.AddHouse.address = 'soweto'
         this.AddHouse.userID = this.DataOfLoggedInPerson
         this.AddHouse.location = "YES"
+        this.AddHouse.latitude = this.Lat
+        this.AddHouse.longitude = this.Long
         this.AddHouse.images= []
     
         console.log(this.AddHouse)

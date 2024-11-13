@@ -22,7 +22,7 @@ export class Tab3Page {
     this.getRegisteredHouses();
   }
   getLoggedinSavedData(){
-    this.auth.getUser().then(data=>{
+    this.auth.isLoggedInStatus().then(data=>{
       console.log(data.queryParams.emailAddres)
       this.CurrentlyLoggedInUser = data.queryParams.emailAddres
       })
