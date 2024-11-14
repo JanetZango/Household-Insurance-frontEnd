@@ -27,18 +27,19 @@ export class AddHouseMulitpleImagesPage implements OnInit {
   DataOfLoggedInPerson!:any
   HouseUrl="../../assets/defaultImage.jpg";
   Imagerr:any[]=[]
+  a:any
+  data:any
 private AddHouse!:AddHouse
   constructor(private route: ActivatedRoute,public household:HouseholdProvider,public alertCtrl: AlertController,public auth:AuthProvider, private router: Router) { }
 
   ngOnInit() {
-    const data = history.state.House_data; // Accessing the passed data
-    console.log(data)
-    this.address = data.address
-    this.description = data.description
-    this.houseID= data.houseID
-    this.latitude = data.latitude
-    this.longitude = data.longitude
-    this.houseImage = data.houseImage
+    this.data = history.state.House_data; // Accessing the passed data
+    this.address = this.data.address
+    this.description = this.data.description
+    this.houseID= this.data.houseID
+    this.latitude = this.data.latitude
+    this.longitude = this.data.longitude
+    this.houseImage = this.data.houseImage
     this.getLoggedinSavedData()
 
   }
@@ -134,7 +135,7 @@ private AddHouse!:AddHouse
       this.AddHouse.images= this.Imagerr
        console.log(this.AddHouse)
        this.household.SaveHouse(this.AddHouse).subscribe(async (_responseHouse:any) => {
-        console.log(_responseHouse)
+
          const alert = await this.alertCtrl.create({
           // header: "Oh no!",
           message: "Image successfully saved",
@@ -158,7 +159,10 @@ private AddHouse!:AddHouse
     
     
     GobACK(){
-      this.router.navigate(['/view-house-profile'])
+      var a = this.data
+      this.router.navigate(['/view-house-profile'], {
+        state: { a }
+      });
     }
 
   

@@ -19,7 +19,6 @@ import { AuthGuard } from '../providers/AuthGuard';
 
 
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(),

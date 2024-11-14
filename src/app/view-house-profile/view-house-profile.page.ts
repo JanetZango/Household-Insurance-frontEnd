@@ -26,10 +26,10 @@ export class ViewHouseProfilePage implements OnInit {
     this.get_HouseDeatilsWithImages();
   }
   ionViewWillEnter(){
-    const data = history.state.a; // Accessing the passed data
-    this.houseData = data
-    this.houseImage = data.houseImage
-    this.houseID = data.houseID
+    // const data = history.state.a; // Accessing the passed data
+    // this.houseData = data
+    // this.houseImage = data.houseImage
+    // this.houseID = data.houseID
     this.get_HouseDeatilsWithImages();
   }
   GoToUpload() {

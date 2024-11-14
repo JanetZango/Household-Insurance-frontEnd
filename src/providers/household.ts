@@ -20,7 +20,7 @@ export class HouseholdProvider {
     private Authentification!: Authentification
     constructor(public http: HttpClient, public ConfigService: ConfigService) {
         this.baseUrl = this.ConfigService.apiUrl;
-        console.log('Hello GroomHeavenProvider Provider');
+
     }
 
     //Register New User Method 
@@ -64,7 +64,6 @@ export class HouseholdProvider {
     getRegisteredUser() {
         const url = `${this.baseUrl}/api/account/GetUsers`
         var dataUser = this.http.get(url, httpOptions)
-        console.log(dataUser)
         return dataUser
             .pipe(
                 catchError(this.handleError)
@@ -75,7 +74,6 @@ export class HouseholdProvider {
     getHouseDetailsWithImages(houseID:any) {
         const url = `${this.baseUrl}/api/house/GetHouseDetails?ID=` + houseID
         var dataUser = this.http.get(url, httpOptions)
-        console.log(dataUser)
         return dataUser
             .pipe(
                 catchError(this.handleError)

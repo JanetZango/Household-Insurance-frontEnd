@@ -11,6 +11,7 @@ import { Geolocation } from '@capacitor/geolocation';
 import { AuthProvider } from 'src/providers/Auth';
 
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
