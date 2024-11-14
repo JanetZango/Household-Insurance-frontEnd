@@ -27,7 +27,7 @@ Guide users to get a local copy up and running. This section should be a quick o
 -cd documents/MobileApplication/Household_Insruance
 3.Install dependencies<br/>
 -npm install<br/>
--Install dependencies<br/>
+-npm install @capacitor/geolocation<br/>
 
 ### Usage
 #### On Web browser
