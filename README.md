@@ -27,12 +27,20 @@ Guide users to get a local copy up and running. This section should be a quick o
 -cd documents/MobileApplication/Household_Insruance
 3.Install dependencies<br/>
 -npm install<br/>
--Install dependencies<br/>
+-npm install @capacitor/geolocation<br/>
 
 ### Usage
+#### On Web browser
 1.To start the server, run:<br/>
 -ionic serve<br/>
 2.Open your browser and go to http://localhost:8100 to see the app in action<br/>
+
+#### On device
+1.Add platform <br/>
+-Ionic cordova platform add android<br/>
+2.Build apk<br/>
+-In Cordova/Capacitor<br/>
+ionic cordova run android / ionic cordova run capacitor
 
 ### Contact
 -Name - janetzango@gmail.com<br/>
