@@ -1,10 +1,40 @@
-h6{
+h6 {
     font-size: 1.5em;
-    color:#816965;
+    color: #816965;
     font-weight: 300 !important;
     text-align: center;
-    padding:10px;
+    padding: 10px;
 }
-.card{
-    border:2px solid red;
+
+.card {
+    border: 2px solid red;
+}
+
+.NoList {
+    text-align: center;
+    padding: 10px;
+    // margin-top:200px;
+    color: rgb(131, 123, 123)
+}
+
+.img {
+    height: 50%;
+    object-fit: cover;
+
+    img {
+        object-fit: cover;
+        height: 100%
+    }
+}
+
+.colCard {
+    box-shadow: 2px 6px 8px rgba(0, 0, 0, 0.637);
+}
+
+.content {
+    height: 50%;
+}
+
+#IconButton {
+    color: red;
 }

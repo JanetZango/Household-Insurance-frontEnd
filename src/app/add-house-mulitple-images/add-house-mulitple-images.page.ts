@@ -5,6 +5,7 @@ import { HouseholdProvider } from 'src/providers/household';
 import { AlertController } from '@ionic/angular';
 import { AuthProvider } from 'src/providers/Auth';
 import { NavController } from '@ionic/angular';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-add-house-mulitple-images',
@@ -21,27 +22,28 @@ export class AddHouseMulitpleImagesPage implements OnInit {
   latitude!:any
   houseImage!:any
   location!:any
+  HouseID:any
   CurrentlyLoggedInUser!:any
   DataOfLoggedInPerson!:any
   HouseUrl="../../assets/defaultImage.jpg";
   Imagerr:any[]=[]
 private AddHouse!:AddHouse
-  constructor(private route: ActivatedRoute,public household:HouseholdProvider,public alertCtrl: AlertController,public auth:AuthProvider) { }
+  constructor(private route: ActivatedRoute,public household:HouseholdProvider,public alertCtrl: AlertController,public auth:AuthProvider, private router: Router) { }
 
   ngOnInit() {
     const data = history.state.House_data; // Accessing the passed data
-    console.log(data);
+    console.log(data)
     this.address = data.address
     this.description = data.description
-    this.houseID= data.HouseID
+    this.houseID= data.houseID
     this.latitude = data.latitude
     this.longitude = data.longitude
     this.houseImage = data.houseImage
+    this.getLoggedinSavedData()
 
   }
   getLoggedinSavedData(){
     this.auth.getLoggedInUserDetails().then(data=>{
-      console.log(data)
       this.CurrentlyLoggedInUser = data.queryParams.emailAddres
       console.log(this.CurrentlyLoggedInUser)
       this.getAllRegisteredUsersOnTheSystem();
@@ -50,17 +52,14 @@ private AddHouse!:AddHouse
 
   getAllRegisteredUsersOnTheSystem(){
     this.household.getRegisteredUser().subscribe((data:any)=>{
-      console.log(data.userList,"users")
       var getAllUsers = data.userList
       for(var i=0; i < getAllUsers.length;i++){
         if(this.CurrentlyLoggedInUser == getAllUsers[i].emailAddress ){
-          console.log(getAllUsers[i],"yes")
         let obj ={
           emailAddress: getAllUsers[i].emailAddress,
           userID:getAllUsers[i].userID
           
         }
-        console.log(obj)
         this.DataOfLoggedInPerson = obj.userID
       }
  
@@ -119,12 +118,9 @@ private AddHouse!:AddHouse
       let obj={
         houseImage:this.HouseUrl
       }
-      console.log(obj)
 
       var uploadImage = obj
-      console.log(uploadImage)
       this.Imagerr.push(uploadImage)
-      console.log(this.Imagerr)
 
       this.AddHouse = new AddHouse
       this.AddHouse.description = this.description
@@ -134,9 +130,9 @@ private AddHouse!:AddHouse
       this.AddHouse.location = this.location
       this.AddHouse.latitude = this.latitude
       this.AddHouse.longitude = this.longitude
+      this.AddHouse.houseID = this.houseID
       this.AddHouse.images= this.Imagerr
-  
-      console.log(this.AddHouse)
+       console.log(this.AddHouse)
        this.household.SaveHouse(this.AddHouse).subscribe(async (_responseHouse:any) => {
         console.log(_responseHouse)
          const alert = await this.alertCtrl.create({
@@ -149,7 +145,6 @@ private AddHouse!:AddHouse
   
       },
         async (error: any) => {
-          console.log('error')
           const alert = await this.alertCtrl.create({
             // header: "Oh no!",
             message: "Information not saved",
@@ -159,11 +154,12 @@ private AddHouse!:AddHouse
           await alert.present();
         });
 
-      console.log('Uploading images...', this.selectedImages);
     } 
     
     
-  
+    GobACK(){
+      this.router.navigate(['/view-house-profile'])
+    }
 
   
 

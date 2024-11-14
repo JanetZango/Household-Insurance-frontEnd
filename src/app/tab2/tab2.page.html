@@ -13,6 +13,10 @@
       </div>
     
     </div>
+    <div *ngIf="this.houseListArray == null || this.houseListArray == ''"  class="NoList">
+     <p>No houses added</p>
+     <ion-icon name="sad-outline"></ion-icon>
+    </div>
   </div>
 
 </ion-content>

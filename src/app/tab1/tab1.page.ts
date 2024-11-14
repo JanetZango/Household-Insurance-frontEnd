@@ -26,7 +26,7 @@ export class Tab1Page {
   DataOfLoggedInPerson: any
   private AddHouse!: AddHouse
   description: any
-  constructor(public alertCtrl: AlertController, private router: Router, public auth: AuthProvider,
+  constructor(public alertCtrl: AlertController, private router: Router, public auth: AuthProvider,public alertController:AlertController,
     public household: HouseholdProvider, private route: ActivatedRoute) {
     this.printCurrentPosition();
     this.getLoggedinSavedData();
@@ -49,17 +49,13 @@ export class Tab1Page {
           }
           this.DataOfLoggedInPerson = obj.userID
         }
-
       }
     })
   }
-
-
   printCurrentPosition = async () => {
     const coordinates = await Geolocation.getCurrentPosition();
     this.Lat = coordinates.coords.latitude.toString()
     this.Long = coordinates.coords.longitude.toString()
-
   };
   async insertImagine(event: any) {
     if (event.target.files && event.target.files[0]) {
@@ -95,7 +91,6 @@ export class Tab1Page {
     this.AddHouse.images = []
     this.household.SaveHouse(this.AddHouse).subscribe(async (_responseHouse: any) => {
       const alert = await this.alertCtrl.create({
-        // header: "Co",
         message: "You have successfully added a new house",
         buttons: ['OK'],
         cssClass: "myAlert",
@@ -112,8 +107,29 @@ export class Tab1Page {
         await alert.present();
       });
   }
-
-
-
+  async logout() {
+    const alert = await this.alertController.create({
+      header: 'Confirmation',
+      message: 'Are you sure you want to logout?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'no',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.auth.logout().then(_responseDelete => {
+              this.router.navigate(['/login'])
+      
+            })
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 
 }

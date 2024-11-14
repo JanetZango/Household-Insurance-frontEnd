@@ -7,4 +7,5 @@ export class AddHouse{
     public location!:string
     public userID!:string
     public images!:{}
+    public houseID!:string
 }

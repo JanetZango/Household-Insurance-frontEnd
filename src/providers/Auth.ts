@@ -22,14 +22,11 @@ export class AuthProvider {
     async login(user: any): Promise<void> {
         await this.storage.create();
         await this.storage.set('user', user);
-
-     
     }
 
     getLoggedInUserDetails() {
         return this.storage.get('user')
     }
-
 
     // Check if user is authenticated
     async isLoggedInStatus(): Promise<boolean> {

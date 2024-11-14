@@ -1,17 +1,18 @@
 
 <ion-content [fullscreen]="true">
+  <ion-button (click)="GobACK()" fill="clear" id="ButtonToGoBack"><ion-icon name="arrow-back"></ion-icon></ion-button>
   <h6>Upload House Images</h6>
   <div class="container">
     <!-- <h2>Preview</h2>
     <div *ngFor="let preview of imagePreviews"> -->
-      <img [src]="HouseUrl" width="100" />
+      <img [src]="HouseUrl" width="400" />
     <!-- </div> -->
   <!-- </div> -->
     <ion-item>
       <ion-input type="file" id="insert" accept="image/*" (change)="insertImagine($event)"/>
     </ion-item>
   
-    <ion-button (click)="uploadImages()" style="--background:#816965">Upload Images</ion-button>
+    <ion-button (click)="uploadImages()" style="--background:#816965" id="UploadHouseImages">Upload Images</ion-button>
   
   </div>
 

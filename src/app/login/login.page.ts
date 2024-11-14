@@ -8,7 +8,6 @@ import { LoadingController } from '@ionic/angular';
 import { AuthProvider } from 'src/providers/Auth';
 
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -19,14 +18,10 @@ export class LoginPage implements OnInit {
   access_token: any
   ArrayEmail = []
   private Authentification!: Authentification
-  constructor(private formBuilder: FormBuilder, public household: HouseholdProvider,public auth:AuthProvider,
+  constructor(private formBuilder: FormBuilder, public household: HouseholdProvider, public auth: AuthProvider,
     public alertCtrl: AlertController, private router: Router, public loader: LoadingController) {
     this._buildForm();
-
-    // var yes = this.auth.logout()
-    // console.log(yes)
   }
-
   ngOnInit() {
   }
   // Form Validation
@@ -36,8 +31,6 @@ export class LoginPage implements OnInit {
       'password': ['', [Validators.required]],
     })
   }
-
-
   // }
   // ***display error if data not entered
   _isInvalidControl(name: string) {
@@ -48,25 +41,18 @@ export class LoginPage implements OnInit {
     this.Authentification.emailAddressUsername = this.signInForm.value.emailAddress
     this.Authentification.password = this.signInForm.value.password
     this.household.AuthentificationUser(this.Authentification).subscribe(async _responseLoginUser => {
-      console.log(_responseLoginUser)
       var emailAddres = this.signInForm.value.emailAddress
-
       const params: NavigationExtras = {
         queryParams: {
           emailAddres: emailAddres,
-          token:_responseLoginUser
+          token: _responseLoginUser
         }
       }
-      console.log(params)
-     var _responseAut = this.auth.login(params)
-        console.log(_responseAut)
-      
-      this.router.navigate(['/tabs'])
-
-
+      var _responseAut = this.auth.login(params).then(data => {
+        this.router.navigate(['/tabs'])
+      })
     },
       async (error: any) => {
-        console.log('error')
         const alert = await this.alertCtrl.create({
           header: "Oh no!",
           message: "invalid credentials provided, Please try again or contact adiministrator",

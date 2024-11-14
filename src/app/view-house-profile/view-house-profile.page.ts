@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { HouseholdProvider } from 'src/providers/household';
 import { AlertController } from '@ionic/angular';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-view-house-profile',
@@ -10,23 +11,28 @@ import { AlertController } from '@ionic/angular';
 })
 export class ViewHouseProfilePage implements OnInit {
   houseImage!: any
-  selectedSegment!: any
+  selectedSegment="home"
   houseData!: any
   houseID!: any
   DisplayImages!:any
   houseID_delete:any
-  constructor(private navController: NavController, public household: HouseholdProvider,public alertController:AlertController) { }
+  constructor(private navController: NavController, public household: HouseholdProvider,public alertController:AlertController, private router: Router) { }
 
   ngOnInit() {
     const data = history.state.a; // Accessing the passed data
-    console.log(data);
+    this.houseData = data
+    this.houseImage = data.houseImage
+    this.houseID = data.houseID
+    this.get_HouseDeatilsWithImages();
+  }
+  ionViewWillEnter(){
+    const data = history.state.a; // Accessing the passed data
     this.houseData = data
     this.houseImage = data.houseImage
     this.houseID = data.houseID
     this.get_HouseDeatilsWithImages();
   }
   GoToUpload() {
-    console.log(this.houseData)
     var House_data = this.houseData
     this.navController.navigateForward(['/add-house-mulitple-images'], {
       state: { House_data }
@@ -34,16 +40,11 @@ export class ViewHouseProfilePage implements OnInit {
   }
   get_HouseDeatilsWithImages() {
     this.household.getHouseDetailsWithImages(this.houseID).subscribe((data: any) => {
-      console.log(data.images)
       this.DisplayImages = data.images
-      console.log(this.DisplayImages)
-
     })
   }
   deleteHouse(a: any) {
-    console.log(a)
     this.houseID_delete = a.houseImageID
-    console.log(this.houseID_delete)
     this.presentAlert();
   }
   async presentAlert() {
@@ -55,22 +56,21 @@ export class ViewHouseProfilePage implements OnInit {
           text: 'No',
           role: 'no',
           handler: () => {
-            console.log('User canceled');
           }
         },
         {
           text: 'yes',
           handler: () => {
-            console.log('User confirmed');
             this.household.DeleteHouseImages(this.houseID_delete).subscribe(_responseDelete => {
-              console.log(_responseDelete)
               this.get_HouseDeatilsWithImages();
             })
           }
         }
       ]
     });
-
     await alert.present();
+  }
+  GobACK(){
+    this.router.navigate(['/tabs/tab3'])
   }
 }

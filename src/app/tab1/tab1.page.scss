@@ -10,11 +10,10 @@ h4{
 }
 #input{
     border:2px solid #253B82;
-    width:85%;
     margin:0px auto;
-    height:200px;
+    height:100px;
     padding:10px;
-    width:310px;
+    width:290px;
 }
 .header{
     background-color: #253B82;
@@ -35,12 +34,15 @@ h3{
 }
 
 #AddHouseDetails{
-    // max-width:90%;
-    // background-color: #816965;
+    width: 300px;
+    border-radius: 100px;
 
 }
 h6{
-    font-size: 1.5em;
+    font-size: 2em;
     color:#816965;
     font-weight: 300 !important;
+}
+#LogoutButton{
+    margin-left:300px;
 }

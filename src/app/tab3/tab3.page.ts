@@ -23,27 +23,27 @@ export class Tab3Page {
     this.getAllRegisteredUsersOnTheSystem();
     this.getRegisteredHouses();
   }
+  ionViewWillEnter(){
+    this.getLoggedinSavedData();
+    this.getAllRegisteredUsersOnTheSystem();
+    this.getRegisteredHouses();
+  }
   getLoggedinSavedData(){
     this.auth.getLoggedInUserDetails().then(data=>{
-      console.log(data.queryParams.emailAddres)
       this.CurrentlyLoggedInUser = data.queryParams.emailAddres
       })
 
   }
   getAllRegisteredUsersOnTheSystem(){
     this.household.getRegisteredUser().subscribe((data:any)=>{
-      console.log(data.userList,"users")
       var getAllUsers = data.userList
-      console.log(getAllUsers)
       for(var i=0; i < getAllUsers.length;i++){
         if(this.CurrentlyLoggedInUser == getAllUsers[i].emailAddress ){
-        console.log(getAllUsers[0])
         let obj ={
           emailAddress: getAllUsers[i].emailAddress,
           userID:getAllUsers[i].userID,
           displayName:getAllUsers[i].displayName
         }
-        console.log(obj)
         this.displayNameCurrentLoggedIn = obj.displayName
         this.emailAdddresCurrentLoggedIn = obj.emailAddress
         this.userIDCurrentLoggedIn =obj.userID
@@ -53,27 +53,12 @@ export class Tab3Page {
   }
   getRegisteredHouses(){
     this.household.GetHousesSaved().subscribe((_responsegetHouses:any) =>{
-      console.log(_responsegetHouses)
-      console.log(_responsegetHouses.housesList ,"house")
       this.houseListArray = _responsegetHouses.housesList
-      console.log(this.houseListArray.houseImage,"house")
     })
   }
 
-  getindex(a:any){
-   console.log(a)
-  //  this.houseID_delete = a.houseID
-  //  console.log(this.houseID_delete)
-  //  this.household.DeleteHouse(this.houseID_delete).subscribe(_responseDelete=>{
-  //   console.log(_responseDelete)
-  //  })
-  this.navController.navigateForward(['/add-house-mulitple-images'], {
-    state: { a }
-  });
-  }
 
   VireMoreDetails(a:any){
-    console.log(a)
     this.router.navigate(['/view-house-profile'], {
       state: { a }
     });

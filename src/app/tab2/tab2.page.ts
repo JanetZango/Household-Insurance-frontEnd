@@ -14,18 +14,17 @@ export class Tab2Page {
   constructor(public household: HouseholdProvider, private alertController: AlertController) {
     this.getRegisteredHouses();
   }
+
+  ionViewWillEnter(){
+    this.getRegisteredHouses();
+  }
   getRegisteredHouses() {
     this.household.GetHousesSaved().subscribe((_responsegetHouses: any) => {
-      console.log(_responsegetHouses)
-      console.log(_responsegetHouses.housesList, "house")
       this.houseListArray = _responsegetHouses.housesList
-      console.log(this.houseListArray.houseImage, "house")
     })
   }
   deleteHouse(a: any) {
-    console.log(a)
     this.houseID_delete = a.houseID
-    console.log(this.houseID_delete)
     this.presentAlert();
   }
   async presentAlert() {
@@ -37,15 +36,12 @@ export class Tab2Page {
           text: 'No',
           role: 'no',
           handler: () => {
-            console.log('User canceled');
           }
         },
         {
           text: 'yes',
           handler: () => {
-            console.log('User confirmed');
             this.household.DeleteHouse(this.houseID_delete).subscribe(_responseDelete => {
-              console.log(_responseDelete)
               this.getRegisteredHouses();
             })
           }

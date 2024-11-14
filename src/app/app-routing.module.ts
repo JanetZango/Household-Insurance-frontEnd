@@ -25,11 +25,13 @@ const routes: Routes = [
   },
   {
     path: 'add-house-mulitple-images',
-    loadChildren: () => import('./add-house-mulitple-images/add-house-mulitple-images.module').then( m => m.AddHouseMulitpleImagesPageModule)
+    loadChildren: () => import('./add-house-mulitple-images/add-house-mulitple-images.module').then( m => m.AddHouseMulitpleImagesPageModule),
+    canActivate: [AuthGuard] 
   },
   {
     path: 'view-house-profile',
-    loadChildren: () => import('./view-house-profile/view-house-profile.module').then( m => m.ViewHouseProfilePageModule)
+    loadChildren: () => import('./view-house-profile/view-house-profile.module').then( m => m.ViewHouseProfilePageModule),
+    canActivate: [AuthGuard] 
   },
 
 ];
